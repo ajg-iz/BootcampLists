@@ -1,38 +1,35 @@
 package com.github.ajg_iz;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.HashMap;
+import java.util.Map;
 
 public class School {
-    List<Student> students;
+    Map<Integer,Student> students;
 
     public School() {
-        this.students = new ArrayList<>();
+        this.students = new HashMap<>();
     }
-    public School(List<Student> students) {
+    public School(Map<Integer,Student> students) {
         this.students = students;
     }
 
     public void addStudent(Student student) {
-        this.students.add(student);
+        this.students.put(student.getStudentID(),student);
     }
 
     public void printStudentList() {
-        for (Student student : this.students) {
+        for (Student student : this.students.values()) {
             System.out.println(student.toString());
         }
     }
 
     public Student getStudentByID(int id) {
-        for (Student student : this.students) {
-            if (student.getStudentID() == id) return student;
-        }
-        return null;
+        return students.get(id);
     }
 
     public boolean removeStudentByID(int id) {
         if (getStudentByID(id) != null) {
-            this.students.remove(getStudentByID(id));
+            this.students.remove(id);
             return true;
         }
         return false;
